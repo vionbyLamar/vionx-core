@@ -1,0 +1,2 @@
+mkdir -p terraform/platform
+touch terraform/platform/main.tf
