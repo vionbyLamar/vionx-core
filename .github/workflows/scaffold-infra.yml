@@ -1,0 +1,28 @@
+name: Auto-Scaffold Terraform Structure
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  scaffold:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Ensure terraform/platform exists
+        run: |
+          mkdir -p terraform/platform
+          if [ ! -f terraform/platform/main.tf ]; then
+            echo 'Scaffolding main.tf...'
+            echo 'provider "azurerm" { features {} }
+
+output "message" {
+  value = "Terraform scaffold complete"
+}' > terraform/platform/main.tf
+          fi
+
+      - name: Show scaffolded files
+        run: ls -R terraform
