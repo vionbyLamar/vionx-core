@@ -11,8 +11,6 @@ on:
 jobs:
   terraform:
     runs-on: ubuntu-latest
-    name: 'Terraform'
-
     permissions:
       id-token: write
       contents: read
