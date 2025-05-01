@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eox-agent
+  namespace: logging
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eox-agent
+  template:
+    metadata:
+      labels:
+        app: eox-agent
+    spec:
+      containers:
+        - name: eox-agent
+          image: vionxregistry.azurecr.io/agent-runtime:latest
+          env:
+            - name: AGENT_KERNEL
+              value: "builder.kernel.internal" # placeholder to be injected
+          resources:
+            limits:
+              cpu: "200m"
+              memory: "256Mi"
